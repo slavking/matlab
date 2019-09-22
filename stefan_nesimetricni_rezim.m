@@ -6,6 +6,23 @@ close all; clear; clc
 % usvojeno da su nominalni MEDJUFAZNI naponi primara i sekundara jednaki 1
 % r.j.
 
+%Moguce kombinacije Y= neuzemljena zvezda Yn= uzemljena zvezda Delta=trougao
+%Prva kombinacija Yn-Yn
+%Druga kombinacija Yn-y
+%Treca kombinacija Yn-Delta
+%Cetvrta kombinacija y-y
+%Peta kombinacija y-yn
+%Sesta kombinacija y-Delta
+%Sedma kombinacija Delta - Yn
+%Osma kombinacija Delta - Y
+%Deveta kombinacija Delta - Delta
+
+nazivi_sprega = [ "YnYn"; "Yn-y"; "YnDe"; "Y-Yn"; "Y--Y"; "Y-De"; "DeYn"; "De-Y"; "DeDe";]
+varijante_sprega = [0,0 ;0,1;0,2;1,0;1,1;1,2;2,0;2,1;2,2]
+
+disp(nazivi_sprega)
+disp(varijante_sprega)
+
 %% Ulazne velicine:
 % Sprega namotaja (0 - uzemljena zvezda (yn), 1 - neuzemljena zvezda (y), 2 - trougao (d))
 sprega_prim = 2; % sprega primara
