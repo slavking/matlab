@@ -6,6 +6,25 @@ close all; clear; clc
 % usvojeno da su nominalni MEDJUFAZNI naponi primara i sekundara jednaki 1
 % r.j.
 
+function povratna_vrednost = odnos_transformacije( sprega_primara, sprega_sekundara)
+  %% Ulazne velicine:
+  % Sprega namotaja (0 - uzemljena zvezda (yn), 1 - neuzemljena zvezda (y), 2 - trougao (d))
+  sprega_prim = sprega_primara; % sprega primara
+  sprega_sek = sprega_sekundara; % sprega sekundara
+  % Nominalni FAZNI naponi primara i sekundara (zavise od sprege):
+  if sprega_prim == 0 || sprega_prim == 1
+  U1fn = 1/sqrt(3);
+  else
+  U1fn = 1;
+  end
+  if sprega_sek == 0 || sprega_sek == 1
+  U2fn = 1/sqrt(3);
+  else
+  U2fn = 1;
+  end
+  povratna_vrednost = U1fn/U2fn; % Odnos transformacije transformatora
+endfunction
+
 %Moguce kombinacije Y= neuzemljena zvezda Yn= uzemljena zvezda Delta=trougao
 %Prva kombinacija Yn-Yn
 %Druga kombinacija Yn-y
@@ -17,28 +36,19 @@ close all; clear; clc
 %Osma kombinacija Delta - Y
 %Deveta kombinacija Delta - Delta
 
-nazivi_sprega = [ "YnYn"; "Yn-y"; "YnDe"; "Y-Yn"; "Y--Y"; "Y-De"; "DeYn"; "De-Y"; "DeDe";]
+nazivi_sprega = [ "YnYn"; "Yn-Y"; "YnDe"; "Y-Yn"; "Y--Y"; "Y-De"; "DeYn"; "De-Y"; "DeDe";]
 varijante_sprega = [0,0 ;0,1;0,2;1,0;1,1;1,2;2,0;2,1;2,2]
 
-disp(nazivi_sprega)
-disp(varijante_sprega)
+broj_redova = rows(varijante_sprega)
+brojac=broj_redova
 
-%% Ulazne velicine:
-% Sprega namotaja (0 - uzemljena zvezda (yn), 1 - neuzemljena zvezda (y), 2 - trougao (d))
-sprega_prim = 2; % sprega primara
-sprega_sek = 0; % sprega sekundara
-% Nominalni FAZNI naponi primara i sekundara (zavise od sprege):
-if sprega_prim == 0 || sprega_prim == 1
-    U1fn = 1/sqrt(3);
-else
-    U1fn = 1;
-end
-if sprega_sek == 0 || sprega_sek == 1
-    U2fn = 1/sqrt(3);
-else
-    U2fn = 1;
-end
-n = U1fn/U2fn; % Odnos transformacije transformatora
+while (brojac > 0)
+  disp(nazivi_sprega[brojac])
+  n = odnos_transformacije(variante_sprega[brojac])
+  brojac=brojac-1
+endwhile
+
+
 % 
 % Impedansa kratkog spoja:
 Zk = 0.02+1j*0.06; % ukupna impedansa kratkog spoja
