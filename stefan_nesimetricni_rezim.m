@@ -22,7 +22,7 @@ function povratna_vrednost = odnos_transformacije( vektor)
   else
   U2fna = 1;
   end
-   povratna_vrednost = [ U1fna; U2fna; U1fna/U2fna] % Odnos transformacije transformatora
+   povratna_vrednost = [ U1fna; U2fna; U1fna/U2fna]; % Odnos transformacije transformatora
 endfunction
 
 %Moguce kombinacije Y= neuzemljena zvezda Yn= uzemljena zvezda Delta=trougao
@@ -46,7 +46,7 @@ brojac=broj_redova
 while (brojac > 0)
 	disp("naziv sprege = ")
 	disp(nazivi_sprega(brojac,1:4))
-	povratni_vektor = ( odnos_transformacije (varijante_sprega(brojac,1:2)) )
+	povratni_vektor = ( odnos_transformacije (varijante_sprega(brojac,1:2)) );
 	sprega_prim = varijante_sprega(brojac,1)
 	sprega_sek = varijante_sprega(brojac,2)
 	U1fn = povratni_vektor(1)
@@ -142,7 +142,8 @@ while (brojac > 0)
 
     %jednofazni kratak spoj K1Z(a)
     %Sta je Zf? Ja sam stavio da bude jednak Zk (impedansi kratkog spoja)
-    disp("Jednofazni kratak spoj - kvar za trougao i za zvezdu")
+    disp("Jednofazni kratak spoj za spregu")
+    disp(nazivi_sprega(brojac,1:4))
     Zf=Rp %aktivni potrosac 
     %Sve jednacine se pisu u obliku f(x)=0 i moraju se dovesti u taj oblik
     %da bi funkcija fsolve prihvatila da radi
@@ -178,10 +179,13 @@ while (brojac > 0)
     Ii2 = z(5)
     I02 = z(6)
     
-    disp("trofazno nesimetricno opterecenje")
+    disp("trofazno nesimetricno opterecenje za spregu")
+    disp(nazivi_sprega(brojac,1:4))
+    
     Za=Rp
     Zb=Rp
     Zc=Rp
+    
     % (1)   Ua2-Za*Ia2=0
     % (2)   Ub2-Zb*Ib2=0
     % (3)   Uc2-Zc*Ic2=0
@@ -200,7 +204,7 @@ while (brojac > 0)
     y = fsolve(@(y) [ Ua2-Za*Ia2; 
                     Ub2-Zb*Ib2; 
                     Uc2-Zc*Ic2; 
-                    y(1)+y(2)+y(3))-Za*(y(4)+y(5)+y(6)); 
+                    y(1)+y(2)+y(3)-Za*(y(4)+y(5)+y(6)); 
                     a^2*y(1)+a*y(2)+y(3)-Zb*(a^2*y(4)+a*y(5)+y(6)); 
                     a*y(1)+a^2*y(2)+y(3)-Zc*(a*y(4)+a^2*y(5)+y(6))], y0);
                     
