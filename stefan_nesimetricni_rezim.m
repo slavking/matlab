@@ -6,23 +6,23 @@ close all; clear; clc
 % usvojeno da su nominalni MEDJUFAZNI naponi primara i sekundara jednaki 1
 % r.j.
 
-function povratna_vrednost = odnos_transformacije( sprega_primara, sprega_sekundara)
+function povratna_vrednost = odnos_transformacije( vektor)
   %% Ulazne velicine:
   % Sprega namotaja (0 - uzemljena zvezda (yn), 1 - neuzemljena zvezda (y), 2 - trougao (d))
-  sprega_prim = sprega_primara; % sprega primara
-  sprega_sek = sprega_sekundara; % sprega sekundara
+  sprega_prim = vektor(1); % sprega primara
+  sprega_sek = vektor(2); % sprega sekundara
   % Nominalni FAZNI naponi primara i sekundara (zavise od sprege):
   if sprega_prim == 0 || sprega_prim == 1
-  U1fn = 1/sqrt(3);
+  U1fna = 1/sqrt(3);
   else
-  U1fn = 1;
+  U1fna = 1;
   end
   if sprega_sek == 0 || sprega_sek == 1
-  U2fn = 1/sqrt(3);
+  U2fna = 1/sqrt(3);
   else
-  U2fn = 1;
+  U2fna = 1;
   end
-  povratna_vrednost = U1fn/U2fn; % Odnos transformacije transformatora
+   povratna_vrednost = [ U1fna; U2fna; U1fna/U2fna] % Odnos transformacije transformatora
 endfunction
 
 %Moguce kombinacije Y= neuzemljena zvezda Yn= uzemljena zvezda Delta=trougao
@@ -43,10 +43,14 @@ broj_redova = rows(varijante_sprega)
 brojac=broj_redova
 
 while (brojac > 0)
-  disp(nazivi_sprega[brojac])
-  n = odnos_transformacije(variante_sprega[brojac])
+  disp("naziv sprege = ")
+  disp(nazivi_sprega(brojac,1:4))
+  povratni_vektor = ( odnos_transformacije (varijante_sprega(brojac,1:2)) )
+  U1fn = povratni_vektor(1)
+  U2fn = povratni_vektor(2)
+  n = povratni_vektor(3)
   brojac=brojac-1
-endwhile
+  
 
 
 % 
@@ -132,3 +136,5 @@ Uc2 = a*Ud2+a^2*Ui2+U02;
 Ia2 = Id2+Ii2+I02;
 Ib2 = a^2*Id2+a*Ii2+I02;
 Ic2 = a*Id2+a^2*Ii2+I02;
+endwhile
+
