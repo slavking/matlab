@@ -120,21 +120,21 @@ while (brojac > 0)
 	                 U01 - Zk*x(6) - x(3)], x0);
 	
 	% Velicine u di0 sistemu:
-	Ud2 = x(1);
-	Ui2 = x(2);
-	U02 = x(3);
-	Id2 = x(4);
-	Ii2 = x(5);
-	I02 = x(6);
+	Ud2 = x(1)
+	Ui2 = x(2)
+	U02 = x(3)
+	Id2 = x(4)
+	Ii2 = x(5)
+	I02 = x(6)
 	%
 	% Fazni naponi i struje sekundara:
-	Ua2 = Ud2+Ui2+U02;
-	Ub2 = a^2*Ud2+a*Ui2+U02;
-	Uc2 = a*Ud2+a^2*Ui2+U02;
+	Ua2 = Ud2+Ui2+U02
+	Ub2 = a^2*Ud2+a*Ui2+U02
+	Uc2 = a*Ud2+a^2*Ui2+U02
 	%
-	Ia2 = Id2+Ii2+I02;
-	Ib2 = a^2*Id2+a*Ii2+I02;
-	Ic2 = a*Id2+a^2*Ii2+I02;
+	Ia2 = Id2+Ii2+I02
+	Ib2 = a^2*Id2+a*Ii2+I02
+	Ic2 = a*Id2+a^2*Ii2+I02
 	brojac=brojac-1
 endwhile
 
