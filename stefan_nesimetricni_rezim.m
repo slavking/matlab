@@ -52,23 +52,23 @@ while (brojac > 0)
 	U2fn = povratni_vektor(2)
 	n = povratni_vektor(3) % Odnos transformacije transformatora
   
-	% 
+	 
 	% Impedansa kratkog spoja:
-	Zk = 0.02+1j*0.06; % ukupna impedansa kratkog spoja
+	Zk = 0.02+1j*0.06 % ukupna impedansa kratkog spoja
 	
 	%% Fazni naponi napajanja primara U ODNOSU NA ZEMLJU:
-	a = exp(1j*2*pi/3); % konstanta a = e^(j*2*pi/3)
-	Ua1 = U1fn;
-	Ub1 = Ua1*a^2;
-	Uc1 = Ua1*a;
+	a = exp(1j*2*pi/3) % konstanta a = e^(j*2*pi/3)
+	Ua1 = U1fn
+	Ub1 = Ua1*a^2
+	Uc1 = Ua1*a
 	% Direktna i inverzna komponenta napona napajanja:
-	Ud1 = 1/3*(Ua1+a*Ub1+a^2*Uc1);
-	Ui1 = 1/3*(Ua1+a^2*Ub1+a*Uc1);
+	Ud1 = 1/3*(Ua1+a*Ub1+a^2*Uc1)
+	Ui1 = 1/3*(Ua1+a^2*Ub1+a*Uc1)
 	% Nulta komponenta zavisi od sprege:
 	if sprega_prim == 0
-	    U01 = 1/3*(Ua1+Ub1+Uc1);
+	    U01 = 1/3*(Ua1+Ub1+Uc1)
 	elseif sprega_prim == 2
-	    U01 = 0;
+	    U01 = 0
 	end
 	
 	%% Spoj dve faze preko impedanse:
@@ -126,15 +126,16 @@ while (brojac > 0)
 	Id2 = x(4)
 	Ii2 = x(5)
 	I02 = x(6)
-	%
+	
 	% Fazni naponi i struje sekundara:
 	Ua2 = Ud2+Ui2+U02
 	Ub2 = a^2*Ud2+a*Ui2+U02
 	Uc2 = a*Ud2+a^2*Ui2+U02
-	%
+	
 	Ia2 = Id2+Ii2+I02
 	Ib2 = a^2*Id2+a*Ii2+I02
 	Ic2 = a*Id2+a^2*Ii2+I02
 	brojac=brojac-1
 endwhile
+
 
