@@ -82,7 +82,9 @@ Rp = 2; % otpornost povezana izmedju faza b i c sekundara (r.j.)
 % NAPOMENA: Jednacine (1)-(3) zavise od vrste kvara; jednacina (6) zavisi
 % od tipa sprege transformatora!!!
 x0 = [1 1 1 1 1 1]; % vektor pocetnih vrednosti promenljivih
-x = fsolve(@(x) [ Ua2-Rp*Ia2;
+Ib2=0
+Ic2=0
+x = fsolve(@(x) [ x(1)+x(2)+x(3)-Rp*(x(4)+x(5)+x(6));
 		  Ib2;
 		  Ic2;
 		  (x(1)+x(2)+x(3))-Rp*(x(4)+x(5)+x(6));
@@ -103,6 +105,6 @@ Ua2 = Ud2+Ui2+U02;
 Ub2 = a^2*Ud2+a*Ui2+U02;
 Uc2 = a*Ud2+a^2*Ui2+U02;
 %
-%Ia2 = Id2+Ii2+I02;
+Ia2 = Id2+Ii2+I02;
 %Ib2 = a^2*Id2+a*Ii2+I02;
 %Ic2 = a*Id2+a^2*Ii2+I02;
